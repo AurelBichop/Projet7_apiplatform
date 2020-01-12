@@ -2,10 +2,25 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"get"}},
+ *     itemOperations={
+ *          "get"={
+ *          "normalization_context"={"groups"={"detail"}}
+ *                },
+ *           "delete",
+ *           },
+ *     collectionOperations={
+ *          "post",
+ *          "get",
+ *          }
+ * )
  */
 class Utilisateur
 {
@@ -13,31 +28,37 @@ class Utilisateur
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get","detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"get","detail"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"get","detail"})
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"detail"})
      */
     private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"detail"})
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"detail"})
      */
     private $email;
 
