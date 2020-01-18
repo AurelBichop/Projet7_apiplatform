@@ -1,3 +1,8 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+# Pour la demande du token
+apiBileMo_login_check:
+  path: /apiBileMo/login_check
+
+# Pour la documentation des Api
+swagger_ui:
+  path: /
+  controller: api_platform.swagger.action.ui
