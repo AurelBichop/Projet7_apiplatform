@@ -12,20 +12,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity(
  *     fields={"email"},
- *     message="Il existe déja un utilisateur avec cette email"
+ *     message="Il existe déja un client avec cette email"
  * )
  * @ApiResource(
  *     normalizationContext={"groups"={"get"}},
- *     itemOperations={
- *          "get"={
- *          "normalization_context"={"groups"={"detail"}}
- *                },
- *           "delete",
- *           },
  *     collectionOperations={
  *          "post",
  *          "get",
- *          }
+ *          },
+ *     itemOperations={
+ *          "get"={
+ *          "normalization_context"={"groups"={"detail"}},
+ *          "access_control"="(is_granted('ROLE_USER') and object.getClient() == user)",
+ *          "acces_control_message" = "Vous n'avez pas accès"
+ *                },
+ *           "delete",
+ *           }
  * )
  */
 class Utilisateur
